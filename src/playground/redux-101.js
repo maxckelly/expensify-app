@@ -23,10 +23,12 @@ const resetCount = ({count = 0} = {}) => ({
   count: count
 })
 
-const store = createStore((state = { count: 0}, action) => {
+// Reducer
+// 1. Reducers are pure functions.
+// 2. Never change state or action.
+const countReducer = (state = { count: 0 }, action) => {
 
-  switch(action.type) {
-
+  switch (action.type) {
     case 'INCREMENT':
       return {
         count: state.count + action.incrementBy
@@ -39,16 +41,16 @@ const store = createStore((state = { count: 0}, action) => {
       return {
         count: action.count
       };
-    case 'RESET': 
+    case 'RESET':
       return {
         count: action.count
       };
     default:
       return state;
   }
+};
 
-  return state;
-});
+const store = createStore(countReducer);
 
 
 // Unsubscribe when called stops logging when the state changes.
