@@ -22,9 +22,23 @@ const addExpense = (
 // REMOVE_EXPENSE
 const removeExpense = ({id} = {}) => ({
   type: "REMOVE_EXPENSE",
-  id: id
+  expense: {
+    id: id
+  }
 });
 
+// EDIT_EXPENSE
+const editExpense = (id, updates) => ({
+  type: "EDIT_EXPENSE",
+  id: id,
+  updates: updates
+})
+
+// CHANGE FILTER TEXT
+const setTextFilter = (text = '') => ({
+  type: "SET_TEXT_FILTER",
+  text: text
+})
 // Expenses reducer
 const expensesReducerDefaultState = [];
 
@@ -38,12 +52,25 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
       ]
     case 'REMOVE_EXPENSE':
       // Filter returns a new array and if the item is not equal (false) to the action id then it will be filtered out.
-      return state.filter(({id}) => id !== action.id)
-      
+      return state.filter(({ id }) => id !== action.id);
+    case 'EDIT_EXPENSE':
+      // The below maps through the expenses, then if the id matches it will spread out the expense array and then every update that has taken place will be added. 
+      return state.map((expense) => {
+        if (expense.id === action.id) {
+          return {
+            ...expense,
+            ...action.updates
+          }
+        } else {
+          return expense;
+        }
+      })
     default:
       return state;
   };
 };
+
+
 
 // Filters Reducer
 const filtersReducerDefaultState = {
@@ -55,6 +82,12 @@ const filtersReducerDefaultState = {
 
 const filtersReducer = (state = filtersReducerDefaultState, action) => {
   switch (action.type) {
+    case 'SET_TEXT_FILTER':
+      // The below iterates through the object then assigns action.text to text.
+      return {
+        ...state,
+        text: action.text
+      };
     default:
       return state;
   }
@@ -78,6 +111,13 @@ const expenseTwo = store.dispatch(addExpense({ description: 'Rent', amount: 200 
 
 // Remove expense
 store.dispatch(removeExpense({id: expenseOne.expense.id}))
+
+// Edit expense
+store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
+
+// Change text filer 
+store.dispatch(setTextFilter('rent'));
+store.dispatch(setTextFilter());
 
 // const demoState = {
 //   expenses: [{
