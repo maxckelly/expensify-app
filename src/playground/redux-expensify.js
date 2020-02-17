@@ -144,6 +144,14 @@ const getVisibleExpenses = (expenses, {text, sortBy, startDate, endDate }) => {
     const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
 
     return startDateMatch && endDateMatch && textMatch;
+  }).sort((a, b) => {
+    if (sortBy === 'Date') {
+      return a.createdAt < b.createdAt ? 1 : -1;
+    }
+
+    if (sortBy === 'Amount') {
+      return a.amount < b.amount ? 1 : -1;
+    }
   });
 }
 
@@ -163,7 +171,7 @@ store.subscribe(() => {
 
 
 // Add expense
-const expenseOne = store.dispatch(addExpense({description: 'Rent', amount: 100, createdAt: 1000}));
+const expenseOne = store.dispatch(addExpense({description: 'Rent', amount: 1100, createdAt: -211000}));
 const expenseTwo = store.dispatch(addExpense({description: 'Coffee', amount: 200 , createdAt: -1000}));
 
 // Set start date
@@ -180,26 +188,11 @@ const expenseTwo = store.dispatch(addExpense({description: 'Coffee', amount: 200
 // store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
 
 // Change text filer 
-store.dispatch(setTextFilter('ee'));
+// store.dispatch(setTextFilter('ee'));
 // store.dispatch(setTextFilter());
 
 // // Change the sort by to either amount or data.
 // store.dispatch(sortByAmount());
 // store.dispatch(sortByDate());
 
-
-// const demoState = {
-//   expenses: [{
-//     id: 'sgoengeo',
-//     description: 'January Rent',
-//     note: 'This was the final payment made.',
-//     amount: 54000,
-//     createdAt: 0
-//   }],
-//   filters: {
-//     text: 'rent',
-//     sortBy: 'amount', // Date or amount.
-//     startDate: undefined,
-//     endDate: undefined
-//   }
-// }
+store.dispatch(sortByAmount())
