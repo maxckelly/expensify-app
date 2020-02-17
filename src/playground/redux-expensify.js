@@ -153,7 +153,7 @@ const getVisibleExpenses = (expenses, {text, sortBy, startDate, endDate }) => {
       return a.amount < b.amount ? 1 : -1;
     }
   });
-}
+};
 
 // Store Creation
 const store = createStore(
