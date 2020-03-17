@@ -12,6 +12,7 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
     case 'REMOVE_EXPENSE':
       // Filter returns a new array and if the item is not equal (false) to the action id then it will be filtered out.
       return state.filter(({ id }) => id !== action.id);
+      break;
     case 'EDIT_EXPENSE':
       // The below maps through the expenses, then if the id matches it will spread out the expense array and then every update that has taken place will be added. 
       return state.map((expense) => {
