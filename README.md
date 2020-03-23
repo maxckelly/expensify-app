@@ -21,3 +21,8 @@
 - TESTING
   - To run testing put `yarn run test`
   - To run tests with watch put `yarn test -- --watch`
+
+  - For testing we have installed the following packages 
+  1. `enzyme`
+  2. `enzyme-to-json`
+  3. We created `setupTests.js`, `jes.config.json` - this was to automate the toJSON meaning we won't have to write `toJSON()` whenever we snapshot 
