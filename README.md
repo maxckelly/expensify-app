@@ -17,3 +17,7 @@
   })
   ```
 `yarn add @babel/plugin-proposal-class-properties --dev`
+
+- TESTING
+  - To run testing put `yarn run test`
+  - To run tests with watch put `yarn test -- --watch`
