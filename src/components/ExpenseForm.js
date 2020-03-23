@@ -3,11 +3,8 @@ import React from 'react';
 // Date packages
 import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
-import 'react-dates/lib/css/_datepicker.css';
-
 
 const now = moment();
-console.log()
 
 class ExpenseForm extends React.Component {
 
