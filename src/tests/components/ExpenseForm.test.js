@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import {shallow} from 'enzyme';
 import ExpenseForm from './../../components/ExpenseForm';
 import expenses from './../fixtures/expenses';
@@ -49,8 +50,6 @@ test('Should set note on textarea change', () => {
   expect(wrapper.state('note')).toBe(value);
 });
 
-// Should set amount if valid input
-// 23.50
 test('Should set amount if valid input', () => {
   const value = "23.50";
   const wrapper = shallow(<ExpenseForm />);
@@ -62,8 +61,6 @@ test('Should set amount if valid input', () => {
   expect(wrapper.state('amount')).toBe(value);
 })
 
-// Should not set amount if invalid input
-// 12.122
 test('Should NOT set amount if INVALID input', () => {
   const value = "12.122";
   const wrapper = shallow(<ExpenseForm />);
@@ -74,3 +71,46 @@ test('Should NOT set amount if INVALID input', () => {
 
   expect(wrapper.state('amount')).toBe("");
 });
+
+// Spies are used to check if something has been successfully submitted with data/props.
+test('Should call onSubmit prop for valid form submission', () => {
+  // To create the spy use jest.fn();
+  const onSubmitSpy = jest.fn();
+  const wrapper = shallow(<ExpenseForm expense={expenses[0]} onSubmit={onSubmitSpy} />);
+
+  wrapper.find('form').simulate('submit', {
+    preventDefault: () => {}
+  });
+
+  // The below checks if no errors have been passed into the error state.
+  expect(wrapper.state('error')).toBe('');
+
+  // The below checks if the form was submitted with the below props.
+  expect(onSubmitSpy).toHaveBeenLastCalledWith({
+    description: expenses[0].description,
+    amount: expenses[0].amount,
+    note: expenses[0].note,
+    createdAt: expenses[0].createdAt
+  });
+});
+
+test('Should set new date on dateChange', () => {
+  const now = moment();
+  const wrapper = shallow(<ExpenseForm />);
+
+  // Below finds the component
+  // The prop is the function that is passed through.
+  // The withStyles is due to how the date package is set up.
+  wrapper.find("SingleDatePicker").prop('onDateChange')(now);
+  expect(wrapper.state('createdAt')).toEqual(now);
+});
+
+test('Should set calendar focus change', () => {
+  const focused = true;
+  const now = moment(0);
+  const wrapper = shallow(<ExpenseForm />);
+
+  wrapper.find("SingleDatePicker").prop('onFocusChange')({focused});
+  console.log(wrapper.state('focused'))
+  expect(wrapper.state('calendarFocused')).toEqual(focused)
+})

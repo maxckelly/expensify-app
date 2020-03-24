@@ -67,7 +67,7 @@ class ExpenseForm extends React.Component {
     }
   };
 
-  onCalendarFocusedChange = ({focused}) => {
+  onFocusChange = ({focused}) => {
     this.setState({calendarFocused: focused})
   };
 
@@ -96,7 +96,7 @@ class ExpenseForm extends React.Component {
             date={this.state.createdAt}
             onDateChange={this.onDateChange}
             focused={this.state.calendarFocused}
-            onFocusChange={this.onCalendarFocusedChange}
+            onFocusChange={this.onFocusChange}
             numberOfMonths={1}
             isOutsideRange={() => false}
           />
