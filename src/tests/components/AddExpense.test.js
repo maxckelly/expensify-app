@@ -4,14 +4,14 @@ import {AddExpense} from './../../components/AddExpense';
 import expenses from './../fixtures/expenses';
 
 // These are to avoid spies getting mixed up
-let onSubmit, addExpense, history, wrapper;
+let addExpense, history, wrapper;
 
 // The below is saying, before each test run the below.
 // Allows us to reuse the spies and not repeat our code.
 beforeEach(() => {
-  onSubmit = jest.fn();
+  addExpense = jest.fn();
   history = { push: jest.fn() };
-  wrapper = shallow(<AddExpense addExpense={onSubmit} history={history} />);
+  wrapper = shallow(<AddExpense addExpense={addExpense} history={history} />);
 });
 
 test('Should render AddExpense page correctly', () => {
