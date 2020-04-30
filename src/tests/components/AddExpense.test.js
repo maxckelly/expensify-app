@@ -4,14 +4,14 @@ import {AddExpense} from './../../components/AddExpense';
 import expenses from './../fixtures/expenses';
 
 // These are to avoid spies getting mixed up
-let addExpense, history, wrapper;
+let startAddExpense, history, wrapper;
 
 // The below is saying, before each test run the below.
 // Allows us to reuse the spies and not repeat our code.
 beforeEach(() => {
-  addExpense = jest.fn();
+  startAddExpense = jest.fn();
   history = { push: jest.fn() };
-  wrapper = shallow(<AddExpense addExpense={addExpense} history={history} />);
+  wrapper = shallow(<AddExpense startAddExpense={startAddExpense} history={history} />);
 });
 
 test('Should render AddExpense page correctly', () => {
@@ -22,5 +22,5 @@ test('Should handle onSubmit', () => {
   wrapper.find('ExpenseForm').prop('onSubmit')(expenses[1]);
 
   expect(history.push).toHaveBeenLastCalledWith("/");
-  expect(addExpense).toHaveBeenLastCalledWith(expenses[1])
+  expect(startAddExpense).toHaveBeenLastCalledWith(expenses[1])
 });
