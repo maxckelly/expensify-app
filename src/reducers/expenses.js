@@ -9,6 +9,8 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
         ...state,
         action.expense
       ]
+    case 'SET_EXPENSES': 
+      return action.expenses;
     case 'REMOVE_EXPENSE':
       // Filter returns a new array and if the item is not equal (false) to the action id then it will be filtered out.
       return state.filter(({ id }) => id !== action.id);
