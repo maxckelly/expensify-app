@@ -10,10 +10,15 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID
 };
 
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 
 const database = firebase.database();
 
-export { firebase, database as default };
+// Below is for google login
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+
+
+export { firebase, googleAuthProvider, database as default };

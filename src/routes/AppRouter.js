@@ -1,28 +1,34 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
+import { Router, Route, Switch, Link, NavLink } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 
 // Components
 import AddExpense from './../components/AddExpense.js';
 import EditExpense from './../components/EditExpense.js';
 import ExpenseDashboard from './../components/ExpenseDashboard.js';
-import Header from './../components/Header.js';
+
 import Help from './../components/Help.js';
 import NotFound from './../components/NotFound.js';
+import Login from './../components/Login';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
+
+export const history = createHistory();
 
 // Switch basically makes it easier for the routes to know when a user is on a 404 page. 
 const AppRouter = () => (
-  <BrowserRouter>
+  <Router history={history}>
     <div>
-      <Header />
       <Switch>
-        <Route path="/" component={ExpenseDashboard} exact={true} />
-        <Route path="/create" component={AddExpense} />
-        <Route path="/edit/:id" component={EditExpense} />
+        <PublicRoute path="/" component={Login} exact={true} />
+        <PrivateRoute path="/dashboard" component={ExpenseDashboard} />
+        <PrivateRoute path="/create" component={AddExpense} />
+        <PrivateRoute path="/edit/:id" component={EditExpense} />
         <Route path="/help" component={Help} />
         <Route component={NotFound} />
       </Switch>
     </div>
-  </BrowserRouter>
+  </Router>
 )
 
 export default AppRouter;
