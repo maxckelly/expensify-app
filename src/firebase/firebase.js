@@ -10,9 +10,6 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID
 };
 
-console.log(process.env.FIREBASE_API_KEY)
-
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
