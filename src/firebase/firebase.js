@@ -19,5 +19,4 @@ const database = firebase.database();
 // Below is for google login
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-
 export { firebase, googleAuthProvider, database as default };

@@ -1,22 +1,24 @@
-// html {
-//   font-size: 62.5%;
-// }
+html {
+  font-size: 62.5%;
+}
 
-// body {
-//   font-family: Helvetica, Arial, sans-serif;
-//   font-size: 1.6rem;
-//   background: white;
-// }
+body {
+  color: #333333;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.6rem;
+  background: white;
+  line-height: 1.6;
+}
 
-// button {
-//   cursor: pointer;
-// }
+button {
+  cursor: pointer;
+}
 
-// button:disabled {
-//   cursor: default;
-// }
+button:disabled {
+  cursor: default;
+}
 
-// .is-active {
-//   font-weight: bold;
-//   color: red;
-// }
+.is-active {
+  font-weight: bold;
+  color: red;
+}
