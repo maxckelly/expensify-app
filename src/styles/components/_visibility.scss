@@ -1,0 +1,12 @@
+.show-for-mobile {
+  @media (min-width: $desktop-breakpoint) {
+  display: none;    
+  };
+};
+
+// The - 0.1rem is to make sure they aren't both running at the same time
+.show-for-desktop {
+  @media (max-width: $desktop-breakpoint - 0.1rem) {
+    display: none;
+  }
+};
