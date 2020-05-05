@@ -12,6 +12,8 @@ import {startSetExpenses, removeExpense, editExpense} from './actions/expenses';
 import {setTextFilter, sortByAmount, sortByDate, setStartDate, setEndDate} from './actions/filters';
 import { login, logout } from './actions/auth';
 
+// Components 
+import LoadingPage from './components/LoadingPage';
 // Store Selectors
 import getVisibleExpenses from './selectors/expenses';
 
@@ -35,9 +37,8 @@ const renderApp = () => {
     hasRendered = true;
   }
 };
-ReactDOM.render(<p> Loading... </p>, document.getElementById('app'));
 
-
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 // Google auth
 firebase.auth().onAuthStateChanged((user) => {
